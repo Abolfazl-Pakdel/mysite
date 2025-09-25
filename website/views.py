@@ -8,7 +8,7 @@ from django.http import HttpResponse,JsonResponse
 # def json_test(request):
 #   return JsonResponse({'name':'Abolfazl'})
 def index_view(request):
-  return render(request,'website\index.html')
+  return render(request,'index.html')
 
 def about_view(request):
   return render(request, 'about.html')
