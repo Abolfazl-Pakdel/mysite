@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('http-test/', http_test),
     # path('json-test/', json_test),
-    path('', include('website.urls'))
+    path('', include('website.urls')),
+    path('blog/', include('blog.urls'))
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
