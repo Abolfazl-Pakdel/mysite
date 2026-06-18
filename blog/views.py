@@ -1,11 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from blog.forms import CommentForm
 from blog.models import Post, Comment
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from blog.forms import CommentForm
 from django.contrib import messages
-
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 # Create your views here.
 def blog_view(request, **kwargs):
   posts = Post.objects.filter(status=1)
@@ -36,14 +37,20 @@ def blog_single(request, pid):
       messages.add_message(request, messages.ERROR, 'Your comment did not sent.')
   posts = Post.objects.filter(status=1)
   post = get_object_or_404(posts, pk=pid)
-  comments = Comment.objects.filter(post=post.id,approved=True)
-  #
-  previous_post = Post.objects.filter(id__lt=post.id).order_by('-id').first()
-  #
-  next_post = Post.objects.filter(id__gt=post.id).order_by('-id').first()
-  form = CommentForm(request.POST)
-  context = {'post': post,'previous_post': previous_post,'next_post': next_post,'comments': comments, 'form': form}
-  return render(request, 'blog/blog-single.html', context)
+  if not post.login_require:
+    comments = Comment.objects.filter(post=post.id,approved=True)
+    # <=====================>
+    next_post = Post.objects.filter(id__gt=post.id).order_by('-id').first()
+    previous_post = Post.objects.filter(id__lt=post.id).order_by('-id').first()
+    # <======================>
+    form = CommentForm(request.POST)
+    context = {'post': post, 'previous_post': previous_post, 'next_post': next_post, 'comments': comments, 'form': form}
+    return render(request, 'blog/blog-single.html', context)
+  else:
+    return HttpResponseRedirect(reverse('accounts:login'))
+
+
+
 
 def test(request):
   # posts = Post.objects.all()

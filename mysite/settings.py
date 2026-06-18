@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'taggit',
     'django_summernote',
     'captcha',
+    'accounts',
 ]
 # sites framework
 SITE_ID = 2
@@ -58,6 +59,9 @@ SITE_ID = 2
 ROBOTS_USE_HOST = True
 ROBOTS_USE_SITEMAP = True
 
+#<-------------->
+LOGIN_URL = 'accounts:login'
+# <----------->
 # summernotesconfigs
 UMMERNOTE_THEME = 'bs4'
 SUMMERNOTE_CONFIG = {
