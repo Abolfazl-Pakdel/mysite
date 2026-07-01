@@ -12,6 +12,12 @@ ALLOWED_HOSTS = []
 
 # INSTALLED_APPS = []
 
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "mysite-2yer.onrender.com",
+]
+
 
 # sites framework
 SITE_ID = 2
