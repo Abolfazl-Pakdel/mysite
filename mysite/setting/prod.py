@@ -6,7 +6,7 @@ from mysite.settings import *
 SECRET_KEY = 'django-insecure-_$q(32lk+o(5)_@u8krlg+#k^%o+3l=3-ba7sy@xr@#4ue*$*g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
